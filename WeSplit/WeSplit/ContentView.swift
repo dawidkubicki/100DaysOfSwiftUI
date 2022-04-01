@@ -58,14 +58,6 @@ struct ContentView: View {
                     Text("Percentage of tip you want to leave")
                 }
 
-//                Section {
-//                    Picker("New tip percentage", selection: $tipPercentage) {
-//                        ForEach(1..<101) {
-//                            Text($0, format: .percent)
-//                        }
-//                    }
-//                }
-                
                 Section {
                     Text(totalPerPerson, format: .currency(code: Locale.current.currencyCode ?? "USD"))
                 } header: {
