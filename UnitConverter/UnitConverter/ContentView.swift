@@ -9,18 +9,77 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var inputValue = 0.0
     @FocusState private var amountIsFocused: Bool
     
     @State private var chosenUnit = "Temperature"
     let units = ["Temperature", "Length", "Time", "Volume"]
     
-    @State private var lengthUnitInput = "meters"
     let lengthUnits = ["m", "km", "feet", "yard", "miles"]
+    
+    @State private var lengthUnitInput = "meters"
     @State private var lengthUnitOutput = "meters"
+    
+    @State private var inputValue = 0.0
     
     private var myType: FloatingPointFormatStyle<Double> {
         return .number
+    }
+    
+    func converter(unit: String, from: String, to: String, _ input: Double) -> Double {
+        
+        var baseValue = 0.0
+        var output = 0.0
+        
+        if unit == "Length" {
+            
+            // Convert everything to meters
+            
+            if from == "m" {
+                baseValue = input
+            } else if from == "km" {
+                baseValue = input * 1000
+            } else if from == "feet" {
+                baseValue = input * 1000
+            } else if from == "yard" {
+                baseValue = input * 1000
+            } else if from == "miles" {
+                baseValue = input * 1000
+            }
+            
+            // Return converting from meters
+            
+            if to == "m" {
+                output = baseValue
+            } else if to == "km" {
+                output = baseValue * 1000
+            } else if to == "feet" {
+                output = baseValue * 1000
+            } else if to == "yard" {
+                output = baseValue * 1000
+            } else if to == "miles" {
+                output = baseValue * 1000
+            }
+            
+        }
+        
+        return output
+    
+    }
+    
+    private var finalResult: Double {
+        switch chosenUnit {
+        case "Temperature":
+            return 0.0
+        case "Length":
+            return converter(unit: chosenUnit, from: lengthUnitInput, to: lengthUnitOutput, inputValue)
+        case "Time":
+            return 0.0
+        case "Volume":
+            return 0.0
+        default:
+            return 0.0
+        }
+        
     }
     
     var body: some View {
@@ -61,10 +120,13 @@ struct ContentView: View {
                             Text("Output units")
                         }
                         
-                        TextField("Amount", value: $inputValue, format: myType)
-                                                .keyboardType(.decimalPad)
-                                                .focused($amountIsFocused)
-                        
+                        Section {
+                            TextField("Amount", value: $inputValue, format: myType)
+                                                    .keyboardType(.decimalPad)
+                                                    .focused($amountIsFocused)
+                        } header: {
+                            Text("Number to convert")
+                        }
                     } else if chosenUnit == "Time" {
                         Text("Time")
                     } else if chosenUnit == "Volume" {
@@ -74,6 +136,12 @@ struct ContentView: View {
                     }
                 } header: {
                     Text("Attributes")
+                }
+                
+                Section {
+                    Text("\(finalResult)")
+                } header: {
+                    Text("Result")
                 }
             }
             .navigationTitle("UnitConverter")
