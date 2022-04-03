@@ -201,7 +201,7 @@ struct ContentView: View {
                 }
                 
                 Section {
-                    Text("\(finalResult)")
+                    Text("\(finalResult.formatted())")
                 } header: {
                     Text("Result")
                 }
