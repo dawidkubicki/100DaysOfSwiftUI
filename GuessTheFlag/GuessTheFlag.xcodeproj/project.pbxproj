@@ -11,6 +11,7 @@
 		12B2F61527FCD5AD00CAF86B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B2F61427FCD5AD00CAF86B /* ContentView.swift */; };
 		12B2F61727FCD5AF00CAF86B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12B2F61627FCD5AF00CAF86B /* Assets.xcassets */; };
 		12B2F61A27FCD5AF00CAF86B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12B2F61927FCD5AF00CAF86B /* Preview Assets.xcassets */; };
+		12CC371827FF366700B4F66D /* SignInWithAppleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CC371727FF366700B4F66D /* SignInWithAppleButtonView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		12B2F61427FCD5AD00CAF86B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		12B2F61627FCD5AF00CAF86B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		12B2F61927FCD5AF00CAF86B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		12CC371727FF366700B4F66D /* SignInWithAppleButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithAppleButtonView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 				12B2F61427FCD5AD00CAF86B /* ContentView.swift */,
 				12B2F61627FCD5AF00CAF86B /* Assets.xcassets */,
 				12B2F61827FCD5AF00CAF86B /* Preview Content */,
+				12CC371727FF366700B4F66D /* SignInWithAppleButtonView.swift */,
 			);
 			path = GuessTheFlag;
 			sourceTree = "<group>";
@@ -137,6 +140,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12CC371827FF366700B4F66D /* SignInWithAppleButtonView.swift in Sources */,
 				12B2F61527FCD5AD00CAF86B /* ContentView.swift in Sources */,
 				12B2F61327FCD5AD00CAF86B /* GuessTheFlagApp.swift in Sources */,
 			);
