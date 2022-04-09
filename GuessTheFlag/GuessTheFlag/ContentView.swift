@@ -16,6 +16,10 @@ struct ContentView: View {
     
     @State private var correctAnswer = Int.random(in: 0...2)
     @State private var finalScore = 0
+    @State private var questionNumber = 0
+    
+    private var endGameTitle = "This is the end of a game"
+    @State private var showingEndGame = false
 
     var body: some View {
         ZStack {
@@ -31,36 +35,43 @@ struct ContentView: View {
                     .font(.largeTitle.bold())
                     .foregroundColor(.white)
                 
-                VStack(spacing: 15) {
-                    VStack {
-                        Text("Tap the flag of")
-                            .foregroundStyle(.secondary)
-                            .font(.subheadline.weight(.heavy))
-                        Text(countries[correctAnswer])
-                            .font(.largeTitle.weight(.semibold))
-                    }
-                    
-                    ForEach(0..<3) { number in
-                        Button {
-                            flagTapped(number)
-                        } label: {
-                            Image(countries[number])
-                                .renderingMode(.original)
-                                .clipShape(Capsule())
-                                .shadow(radius: 5)
+                if questionNumber != 8 {
+                
+                    VStack(spacing: 15) {
+                        VStack {
+                            Text("Tap the flag of")
+                                .foregroundStyle(.secondary)
+                                .font(.subheadline.weight(.heavy))
+                            Text(countries[correctAnswer])
+                                .font(.largeTitle.weight(.semibold))
+                        }
+                        
+                        ForEach(0..<3) { number in
+                            Button {
+                                flagTapped(number)
+                            } label: {
+                                Image(countries[number])
+                                    .renderingMode(.original)
+                                    .clipShape(Capsule())
+                                    .shadow(radius: 5)
+                            }
                         }
                     }
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 20)
+                    .background(.thinMaterial)
+                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                    Spacer()
+                    Spacer()
                 }
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 20)
-                .background(.thinMaterial)
-                .clipShape(RoundedRectangle(cornerRadius: 20))
-                Spacer()
-                Spacer()
                 
                 Text("Score: \(finalScore)")
                     .foregroundColor(.white)
                     .font(.title.bold())
+                
+                Text("Question: \(questionNumber+1)/8")
+                    .foregroundColor(.white)
+                    .font(.subheadline)
                 
                 Spacer()
             }
@@ -72,9 +83,17 @@ struct ContentView: View {
         } message: {
             Text("Your score is \(finalScore)")
         }
+        .alert(endGameTitle, isPresented: $showingEndGame) {
+            Button("Restart the game", action: restartGame)
+        } message: {
+            Text("You have ended game with score: \(finalScore)")
+        }
     }
     
     func flagTapped(_ number: Int) {
+        
+        questionNumber += 1
+        
         if number == correctAnswer {
             scoreTitle = "Correct"
             finalScore += 1
@@ -83,11 +102,20 @@ struct ContentView: View {
         }
         
         showingScore = true
+        
+        if questionNumber >= 8 {
+            showingEndGame = true
+        }
     }
     
     func askQuestion() {
         countries.shuffle()
         correctAnswer = Int.random(in: 0...2)
+    }
+    
+    func restartGame() {
+        finalScore = 0
+        questionNumber = 0
     }
 }
 
