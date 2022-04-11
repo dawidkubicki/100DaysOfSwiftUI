@@ -7,6 +7,20 @@
 
 import SwiftUI
 
+struct RedTextView: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.title3)
+            .foregroundColor(.red)
+    }
+}
+
+extension View {
+    func redText() -> some View {
+        modifier(RedTextView())
+    }
+}
+
 struct ContentView: View {
     
     @State private var checkAmount = 0.0
@@ -69,7 +83,12 @@ struct ContentView: View {
                 }
                 
                 Section {
-                    Text(totalPrice, format: myCurrency)
+                    if tipPercentage > 0 {
+                        Text(totalPrice, format: myCurrency)
+                    } else {
+                        Text(totalPrice, format: myCurrency)
+                            .redText()
+                    }
                 } header: {
                     Text("Total amount to pay")
                 }
